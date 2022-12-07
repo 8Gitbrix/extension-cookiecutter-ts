@@ -1,5 +1,7 @@
 import base64
 import requests
+from datetime import datetime
+import maya
 
 GITHUB_TOKEN = "GITHUB_TOKEN"
 CODESPACE_NAME = "CODESPACE_NAME"
@@ -22,3 +24,20 @@ def getCodespace():
     codespace_name, codespace_token = readEnvFile()
     response = requests.get(URL + codespace_name, headers={'Authorization': f'token {codespace_token}'})
     return response.json()
+
+import json
+codespace_json = getCodespace()
+print(maya.parse(codespace_json["created_at"]).datetime(naive=True), datetime.now())
+days_ago = datetime.now() - maya.parse(codespace_json["created_at"]).datetime(naive=True)
+print(days_ago)
+print(json.dumps({
+            "codespace_name": codespace_json["display_name"],
+            "repo_name": codespace_json["repository"]["full_name"],
+            "machine": codespace_json["machine"]["display_name"],
+            "git_ref": codespace_json["git_status"]["ref"],
+            "git_behind": codespace_json["git_status"]["behind"],
+            "git_ahead": codespace_json["git_status"]["ahead"],
+            "idle_timeout_minutes": codespace_json["idle_timeout_minutes"],
+            "created_days_ago": days_ago.days,
+            "retention_period_days": round(codespace_json["retention_period_minutes"] * 0.000694444)
+}))
