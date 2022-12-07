@@ -13,7 +13,7 @@ class CodespaceMenu extends ReactWidget {
     render(): JSX.Element {
       return <div>
         <h3>GITHUB CODESPACES</h3>
-        <p>{this.props.}</p>
+        <p>{this.props.codespace_name}</p>
       </div>;
     }
 }

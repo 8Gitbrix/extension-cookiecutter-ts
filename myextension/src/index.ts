@@ -33,6 +33,8 @@ const plugin: JupyterFrontEndPlugin<void> = {
     requestAPI<any>('hello')
       .then(data => {
         console.log(data);
+        const widget = new CodespaceMenu();
+        shell.add(widget, 'left'); 
       })
       .catch(reason => {
         console.error(
@@ -41,7 +43,6 @@ const plugin: JupyterFrontEndPlugin<void> = {
       });
     
     // Create UI left sidebar widget
-    const widget = new CodespaceMenu();
     // widget.id = '@jupyterlab-sidepanel/example';
     // widget.title.iconClass = "jp-SpreadsheetIcon jp-SideBar-tabIcon";
     // widget.title.caption = "Codespace Panel";
@@ -49,7 +50,6 @@ const plugin: JupyterFrontEndPlugin<void> = {
     // let summary = document.createElement('p');
     // widget.node.appendChild(summary);
     // summary.innerText = "Hello, World!";
-    shell.add(widget, 'left'); 
     
     // Reference: https://blog.ouseful.info/2022/04/28/jupyterlab-cell-status-indicator/
     NotebookActions.executed.connect((_, args) => {
