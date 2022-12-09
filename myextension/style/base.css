@@ -3,6 +3,42 @@
 
     https://jupyterlab.readthedocs.io/en/stable/developer/css.html
 */
+@import './variables.css';
+
 .codespace-menu-box {
     background-color: white;
+    font-family: var(--jp-ui-font-family);
+    display: flex;
+    flex-direction: column;
+    padding: 8px;
+}
+
+.codespace-icon {
+    background-image: url('../icons/vm-connect.svg');
+}
+
+.info-line {
+  font-size: 13px;
+  display: flex;
+  flex-direction: row;
+  justify-content: start;
+  text-align: left;
+  align-items: center;
+  padding: 4px 8px;
+  transition: background-color 0.2s;
+  cursor: pointer;
+}
+
+.info-icon {
+  padding-right: 3px;
+  cursor: pointer;
+  user-select: none;
+}
+
+.info-title {
+  font-size: 12px;
+  align-items: center;
+  padding: 4px 10px;
+  font-weight: 700;
+  border-bottom-color: black;
 }

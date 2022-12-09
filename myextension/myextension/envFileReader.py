@@ -27,9 +27,7 @@ def getCodespace():
 
 import json
 codespace_json = getCodespace()
-print(maya.parse(codespace_json["created_at"]).datetime(naive=True), datetime.now())
 days_ago = datetime.now() - maya.parse(codespace_json["created_at"]).datetime(naive=True)
-print(days_ago)
 print(json.dumps({
             "codespace_name": codespace_json["display_name"],
             "repo_name": codespace_json["repository"]["full_name"],
